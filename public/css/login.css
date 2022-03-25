@@ -1,0 +1,68 @@
+.login-div {
+  margin: 0 auto;
+  margin-top: 3rem;
+  border: 1px solid rgb(235, 237, 240);
+  max-width: 40rem;
+  padding: 2rem;
+  background-color: rgb(255, 255, 255);
+}
+
+.login-form {
+  transition: filter 0.1s ease 0s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login-email-div,
+.login-password-div {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.login-email,
+.login-password {
+  font-size: 1.1rem;
+}
+
+.login-form-input {
+  margin-top: 1rem;
+  border: 1px solid rgb(235, 237, 240);
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: rgb(252, 252, 252);
+  font-size: 1.5rem;
+  outline: none;
+}
+
+.login-form-input:focus {
+  box-shadow: 0px 0px 5px;
+}
+
+.login-form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  width: 5rem;
+  height: 2rem;
+  background-color: rgb(24, 144, 255);
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  align-self: flex-end;
+}
+
+.login-form-button:hover {
+  opacity: 0.8;
+}
+
+#server-message {
+  position: relative;
+  color: rgb(245, 34, 45);
+  width: 100%;
+  text-align: center;
+}
