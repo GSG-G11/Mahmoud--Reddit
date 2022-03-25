@@ -24,7 +24,6 @@ header {
 .login-signup {
   width: 18rem;
   height: 2rem;
-  /* background-color: aqua; */
   display: flex;
   justify-content: space-around;
 }
