@@ -11,7 +11,10 @@ module.exports = async (req, res) => {
     );
     const checkEmail = await getUserByEmail(email);
     if (checkEmail) {
-      return res.json({ message: "User already exict" });
+      return res.status(401).json({
+        status: "error",
+        message: "User already exict",
+      });
     }
     const hashedPassword = await hashPassword(password);
     const newUser = await insertNewUser(name, email, hashedPassword);
@@ -30,7 +33,8 @@ module.exports = async (req, res) => {
     if (error.details) {
       const allErrors = error.details.map((x) => x.message);
       res.json(allErrors);
+    } else {
+      res.json(error);
     }
-    res.json(error);
   }
 };
