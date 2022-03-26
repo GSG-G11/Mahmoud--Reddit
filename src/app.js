@@ -3,7 +3,7 @@ const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const app = express();
 const { join } = require("path");
-const router = require("./router/signup");
+const router = require("./router");
 app.disable("x-powered-by");
 
 app.use([

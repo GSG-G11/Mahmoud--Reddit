@@ -5,13 +5,13 @@ require("dotenv").config();
 module.exports = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const validateInput = signUpSchema.validate({ name, email, password });
-    if (validateInput.error) {
-      throw validateInput.error.details[0].message;
-    }
+    await signUpSchema.validateAsync(
+      { name, email, password },
+      { abortEarly: false }
+    );
     const checkEmail = await getUserByEmail(email);
     if (checkEmail) {
-      throw "User already exists";
+      return res.json({ message: "User already exict" });
     }
     const hashedPassword = await hashPassword(password);
     const newUser = await insertNewUser(name, email, hashedPassword);
@@ -27,6 +27,10 @@ module.exports = async (req, res) => {
       .status(201)
       .redirect("/posts");
   } catch (error) {
+    if (error.details) {
+      const allErrors = error.details.map((x) => x.message);
+      res.json(allErrors);
+    }
     res.json(error);
   }
 };
