@@ -2,7 +2,7 @@ const { hashPassword, signToken, signUpSchema } = require("../../utils");
 const { getUserByEmail, insertNewUser } = require("../../database/queries");
 require("dotenv").config();
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const validateInput = signUpSchema.validate({ name, email, password });
