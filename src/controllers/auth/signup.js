@@ -27,6 +27,6 @@ module.exports = async (req, res) => {
       .status(201)
       .redirect("/posts");
   } catch (error) {
-    console.log(error);
+    res.json(error);
   }
 };
