@@ -1,5 +1,5 @@
 const { getUserInfo } = require("../../database/queries");
-const { comparePassword, signToken, loginSchema } = require("../../utils");
+const { comparePassword, loginSchema } = require("../../utils");
 
 module.exports = async (req, res, next) => {
   try {
@@ -23,21 +23,14 @@ module.exports = async (req, res, next) => {
         status: "error",
         message: "Email or Password is wrong!",
       });
-      // throw "User or Password is wrong!";
     }
-    req.user = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    };
-    // next();
+    req.userId = user.id;
+    next();
   } catch (error) {
     if (error.details) {
       const allErrors = error.details.map((x) => x.message);
-      console.log(allErrors);
-      res.json(allErrors);
-    } else {
-      res.json(error);
+      return res.json(allErrors);
     }
+    res.json(error);
   }
 };
