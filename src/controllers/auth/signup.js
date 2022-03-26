@@ -1,5 +1,6 @@
-const { hashPassword, signUpSchema } = require("../../utils");
+const { hashPassword, signToken, signUpSchema } = require("../../utils");
 const { getUserByEmail, insertNewUser } = require("../../database/queries");
+require("dotenv").config();
 
 module.exports = async (req, res, next) => {
   try {
@@ -8,16 +9,23 @@ module.exports = async (req, res, next) => {
     if (validateInput.error) {
       throw validateInput.error.details[0].message;
     }
-    let checkEmail;
-    await getUserByEmail(email).then((res) => (checkEmail = res.rows[0]));
+    const checkEmail = await getUserByEmail(email);
     if (checkEmail) {
-      throw "Email already exict";
+      throw "User already exists";
     }
-    let hashedPassword;
-    await hashPassword(password).then((res) => (hashedPassword = res));
+    const hashedPassword = await hashPassword(password);
     const newUser = await insertNewUser(name, email, hashedPassword);
-    req.userId = newUser.rows[0].id;
-    next();
+    const tokenId = newUser.rows[0].id;
+    const payload = { tokenId };
+    const token = await signToken(payload, process.env.SECRET_KEY);
+    res
+      .cookie("token", token, {
+        maxAge: 300000000,
+        httpOnly: true,
+        sameSite: true,
+      })
+      .status(201)
+      .redirect("/posts");
   } catch (error) {
     console.log(error);
   }

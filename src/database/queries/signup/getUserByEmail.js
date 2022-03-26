@@ -1,6 +1,9 @@
 const connection = require("../../config/connection");
 
-module.exports = (email) => {
-  const row = connection.query("SELECT * FROM users WHERE email = $1", [email]);
-  return row;
+module.exports = async (email) => {
+  const { rows } = await connection.query(
+    "SELECT email FROM users WHERE email = $1",
+    [email]
+  );
+  return rows[0];
 };
