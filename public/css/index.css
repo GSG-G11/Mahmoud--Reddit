@@ -149,15 +149,8 @@ header {
 
 .all-comments {
   display: none;
-  transition: all 0.9s linear;
-}
-.hidden {
-  display: none;
 }
 
-.visuallyhidden {
-  opacity: 0;
-}
 .comment-section {
   margin: 1rem;
 }
@@ -176,4 +169,89 @@ header {
 
 .comment-description {
   margin-top: 0.5rem;
+}
+
+/* ======================================================================= */
+
+.header-add-comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-add-comment h1 {
+  color: #0179d2;
+}
+
+.add-comment-section {
+  border: 1px solid rgb(235, 237, 240);
+  padding: 2rem;
+  background-color: rgb(255, 255, 255);
+  display: none;
+}
+
+.add-comment-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: filter 0.1s ease 0s;
+}
+
+.title-div,
+.description-div {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.title,
+.description {
+  font-size: 1.1rem;
+}
+
+.title-form-input,
+.description-form-input {
+  margin-top: 1rem;
+  border: 1px solid rgb(235, 237, 240);
+  border-radius: 5px;
+  width: 50%;
+  padding: 0.5rem;
+  background-color: rgb(252, 252, 252);
+  font-size: 1.5rem;
+  outline: none;
+}
+
+.description-form-input {
+  width: 100%;
+}
+.title-form-input:focus,
+.description-form-input:focus {
+  box-shadow: 0px 0px 5px;
+}
+
+.add-comment-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  width: 7.5rem;
+  height: 3rem;
+  background-color: rgb(24, 144, 255);
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  align-self: flex-end;
+}
+
+.add-comment-button:hover {
+  opacity: 0.8;
+}
+
+#errors-message {
+  position: relative;
+  color: rgb(245, 34, 45);
+  width: 100%;
+  text-align: center;
 }
