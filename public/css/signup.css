@@ -61,8 +61,7 @@
   opacity: 0.8;
 }
 
-#server-message {
-  position: relative;
+#errors-message {
   color: rgb(245, 34, 45);
   width: 100%;
   text-align: center;

@@ -21,19 +21,20 @@
     <form class="signup-form">
         <div class="signup-name-div">
             <h1 class="signup-name">UserName</h1>
-            <input type="text" name="name" placeholder="Name" class="signup-form-input">
+            <input type="text" name="name" placeholder="Name" class="signup-form-input signup-form-name" required>
         </div>
         <div class="signup-email-div">
           <h1 class="signup-email">Email</h1>
-          <input type="text" name="email" placeholder="Email" class="signup-form-input">
+          <input type="text" name="email" placeholder="Email" class="signup-form-input signup-form-email" required>
       </div>
         <div class="signup-password-div">
             <h1 class="signup-password">Password</h1>
-            <input type="password" name="password" placeholder="Password" class="signup-form-input">
+            <input type="password" name="password" placeholder="Password" class="signup-form-input signup-form-password" required>
         </div>
-        <div id="server-message"></div>
+        <div id="errors-message"></div>
         <button type="submit" class="signup-form-button">Sign Up</button>
       </form>
   </div>
+  <script src="../js/signup.js" type="text/javascript"></script>
 </body>
 </html>
