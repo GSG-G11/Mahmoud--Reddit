@@ -2,7 +2,9 @@ const { signToken } = require("../utils");
 require("dotenv").config();
 module.exports = async (req, res) => {
   try {
-    const { SECRET_KEY } = process.env;
+    const {
+      env: { SECRET_KEY },
+    } = process;
     const { userId } = req;
     const token = await signToken({ userId }, SECRET_KEY);
     res
