@@ -1,5 +1,5 @@
-const { hashPassword, signUpSchema } = require("../../utils");
-const { getUserByEmail, insertNewUser } = require("../../database/queries");
+const { hashPassword, signUpSchema } = require("../../../utils");
+const { getUserByEmail, insertNewUser } = require("../../../database/queries");
 require("dotenv").config();
 
 module.exports = async (req, res, next) => {

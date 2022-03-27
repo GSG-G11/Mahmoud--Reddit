@@ -1,7 +1,8 @@
 const router = require("express").Router();
-const signUp = require("../controllers/auth/signup");
+const { getSignupPage, signup } = require("../controllers");
 const setCookie = require("../middlewares/setCookie");
 
-router.post("/signup", signUp, setCookie);
+router.get("/signup", getSignupPage);
+router.post("/signup", signup, setCookie);
 
 module.exports = router;
