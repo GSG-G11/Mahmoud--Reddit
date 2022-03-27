@@ -58,6 +58,8 @@ header {
   opacity: 0.9;
 }
 
+/* ======================================================================= */
+
 .single-post {
   margin-top: 3rem;
   margin-left: 7rem;
@@ -65,6 +67,7 @@ header {
   width: 60rem;
   background-color: white;
   display: flex;
+  margin-bottom: 2rem;
 }
 .votes {
   background-color: #f4f6f8;
@@ -135,7 +138,42 @@ header {
   transition: all 0.3s ease-in;
 }
 
-.up-button:hover,
+.up-button:hover {
+  color: green;
+}
+
 .down-button:hover {
-  background-color: #c3cad1;
+  color: red;
+}
+/* ======================================================================= */
+
+.all-comments {
+  display: none;
+  transition: all 0.9s linear;
+}
+.hidden {
+  display: none;
+}
+
+.visuallyhidden {
+  opacity: 0;
+}
+.comment-section {
+  margin: 1rem;
+}
+.name-in-comment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-name-section {
+  display: flex;
+}
+
+.comment-title {
+  margin-top: 1rem;
+}
+
+.comment-description {
+  margin-top: 0.5rem;
 }
