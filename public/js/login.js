@@ -1,14 +1,10 @@
-const sumbitButton = document.querySelector(".signup-form-button");
-const userName = document.querySelector(".signup-form-name");
+const sumbitButton = document.querySelector(".login-form-button");
 const email = document.querySelector(".signup-form-email");
 const password = document.querySelector(".signup-form-password");
 const errorMessage = document.querySelector("#errors-message");
 let inputError = [];
 sumbitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if (userName.value.trim() === "") {
-    inputError.push("userName is required");
-  }
   if (email.value.trim() === "") {
     inputError.push("Email is required");
   } else if (!email.value.includes("@")) {
@@ -36,11 +32,10 @@ sumbitButton.addEventListener("click", (e) => {
     return;
   }
   const values = {
-    name: userName.value,
     email: email.value,
     password: password.value,
   };
-  fetch("/signup", {
+  fetch("/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",

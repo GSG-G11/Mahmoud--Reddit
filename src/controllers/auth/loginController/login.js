@@ -1,5 +1,5 @@
-const { getUserInfo } = require("../../database/queries");
-const { comparePassword, loginSchema } = require("../../utils");
+const { getUserInfo } = require("../../../database/queries");
+const { comparePassword, loginSchema } = require("../../../utils");
 
 module.exports = async (req, res, next) => {
   try {
