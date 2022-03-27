@@ -5,15 +5,19 @@ module.exports = async (req, res) => {
     const { SECRET_KEY } = process.env;
     const { userId } = req;
     const token = await signToken({ userId }, SECRET_KEY);
-    return res
+    res
       .cookie("token", token, {
         maxAge: 300000000,
         httpOnly: true,
         sameSite: true,
       })
       .status(201)
-      .redirect("/posts");
+      .json({
+        status: "success",
+        message: "User successfully signed up",
+      });
   } catch (err) {
+    console.log(1);
     return res.status(500).json({
       status: "error",
       message: "Internal server error",
