@@ -232,7 +232,8 @@ header {
   opacity: 0.8;
 }
 
-#errors-message {
+#errors-message,
+#errors-message-post {
   position: relative;
   color: rgb(245, 34, 45);
   width: 100%;
