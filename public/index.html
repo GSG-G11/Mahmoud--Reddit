@@ -17,92 +17,137 @@
       <a href="/signup" class="sign-up-button">Sign Up</a>
     </div>
   </header>
-  <section class="posts">
-    <div class="single-post">
-      <aside class="votes">
-        <button class="up-button">
-          <i class="ri-arrow-up-line"></i>
-        </button>
-        <h4>0</h4>
-        <button class="down-button">
-          <i class="ri-arrow-down-line"></i>
+  <!-- <section class="add-post"> 
+    <button class="open-button" onclick="openForm()">Open Form</button>
 
-        </button>
-      </aside>
-      <div class="column-flex">
-        <section class="name-in-post">
-          <div class="name-section">
-            <p class="posted-by">Posted By/</p>
-            <p class="owner-post">Mahmoud</p>
-          </div>
-          <div class="time-div">
-            <p class="time">1-1-1</p>
-          </div>
-        </section>
-        <section class="title-and-description">
-          <h2 class="title-post">Hello</h2>
-          <p class="description-post">xLorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nemo nostrum. Veritatis aperiam magnam libero dolores illum quia dolorem eum natus ea veniam. Neque, dolor perferendis. Nulla exercitationem iure optio.</p>
-        </section>
-        <aside class="comments-side">
-          <button class="show-comment">Show comment 
-            <i class="ri-message-2-line"></i>
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container">
+        <h1>Login</h1>
+    
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+    
+        <button type="submit" class="btn">Login</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div> -->
+      <!-- <div class="header-add-post">
+        <img class="logo-post" src="https://logos-world.net/wp-content/uploads/2020/10/Reddit-Emblem.png" alt="">
+        <img class="logo" src="https://cdn-icons-png.flaticon.com/512/52/52053.png" alt="">
+      </div>
+      <form class="add-post-form">
+        <input type="text" name="createpost" placeholder="Create post" class="createpost-form-input">
+      </form> -->
+      <!-- <form class="add-comment-form">
+        <div class="title-div">
+            <h1 class="title">Title</h1>
+            <input type="text" name="title" placeholder="Title" class="title-form-input">
+        </div>
+        <div class="description-div">
+            <h1 class="description">Description</h1>
+            <input type="text" name="description" placeholder="description" class="description-form-input ">
+        </div>
+        <div id="errors-message"></div>
+        <button type="submit" class="add-comment-button">Add Comment</button>
+      </form> -->
+  <!-- </section> -->
+  <div class="display-row">
+    <section class="posts">
+      <div class="single-post">
+        <aside class="votes">
+          <button class="up-button">
+            <i class="ri-arrow-up-line"></i>
           </button>
-          
-          <button class="add-comment">Add comment 
-            <i class="ri-chat-new-fill"></i>
+          <h4>0</h4>
+          <button class="down-button">
+            <i class="ri-arrow-down-line"></i>
+  
           </button>
         </aside>
-        <section class="add-comment-section">
-          <div class="header-add-comment">
-            <h1>Add comment section</h1>
-            <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/10/Reddit-Logo.png" alt="Reddit-Logo">
+        <div class="column-flex">
+          <section class="name-in-post">
+            <div class="name-section">
+              <p class="posted-by">Posted By/</p>
+              <p class="owner-post">Mahmoud</p>
+            </div>
+            <div class="time-div">
+              <p class="time">1-1-1</p>
+            </div>
+          </section>
+          <section class="title-and-description">
+            <h2 class="title-post">Hello</h2>
+            <p class="description-post">xLorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nemo nostrum. Veritatis aperiam magnam libero dolores illum quia dolorem eum natus ea veniam. Neque, dolor perferendis. Nulla exercitationem iure optio.</p>
+          </section>
+          <aside class="comments-side">
+            <button class="show-comment">Show comment 
+              <i class="ri-message-2-line"></i>
+            </button>
+            
+            <button class="add-comment">Add comment 
+              <i class="ri-chat-new-fill"></i>
+            </button>
+          </aside>
+          <section class="add-comment-section">
+            <form class="add-comment-form">
+                  <textarea type="text" name="comment" placeholder="Comment" class="comment-form-input "></textarea>
+              <div id="errors-message"></div>
+              <button type="submit" class="add-comment-button">Add</button>
+            </form>
+          </section>
+          <div class="all-comments">
+            <section class="comment-section">
+              <div class="name-in-comment">
+                <div class="comment-name-section">
+                  <p class="commented-by">Commented By/</p>
+                  <p class="owner-comment">Mahmoud</p>
+                </div>
+                <div class="comment-time-div">
+                  <p class="comment-time">1-1-2</p>
+                </div>
+              </div>
+              <h1 class="comment-title">Hello</h1>
+              <p class="comment-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores possimus minima reiciendis velit tempora explicabo cum autem nesciunt expedita laudantium, hic ea eum quia. Necessitatibus voluptatibus aliquam nisi libero recusandae?</p>
+            </section>
+            <hr>
+            <section class="comment-section">
+              <div class="name-in-comment">
+                <div class="comment-name-section">
+                  <p class="commented-by">Commented By/</p>
+                  <p class="owner-comment">Mahmoud</p>
+                </div>
+                <div class="comment-time-div">
+                  <p class="comment-time">1-1-2</p>
+                </div>
+              </div>
+              <h1 class="comment-title">Hello</h1>
+              <p class="comment-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores possimus minima reiciendis velit tempora explicabo cum autem nesciunt expedita laudantium, hic ea eum quia. Necessitatibus voluptatibus aliquam nisi libero recusandae?</p>
+            </section>
+            <hr>
           </div>
-          <form class="add-comment-form">
-            <div class="title-div">
-                <h1 class="title">Title</h1>
-                <input type="text" name="title" placeholder="Title" class="title-form-input">
-            </div>
-            <div class="description-div">
-                <h1 class="description">Description</h1>
-                <input type="text" name="description" placeholder="description" class="description-form-input ">
-            </div>
-            <div id="errors-message"></div>
-            <button type="submit" class="add-comment-button">Add Comment</button>
-          </form>
-        </section>
-        <div class="all-comments">
-          <section class="comment-section">
-            <div class="name-in-comment">
-              <div class="comment-name-section">
-                <p class="commented-by">Commented By/</p>
-                <p class="owner-comment">Mahmoud</p>
-              </div>
-              <div class="comment-time-div">
-                <p class="comment-time">1-1-2</p>
-              </div>
-            </div>
-            <h1 class="comment-title">Hello</h1>
-            <p class="comment-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores possimus minima reiciendis velit tempora explicabo cum autem nesciunt expedita laudantium, hic ea eum quia. Necessitatibus voluptatibus aliquam nisi libero recusandae?</p>
-          </section>
-          <hr>
-          <section class="comment-section">
-            <div class="name-in-comment">
-              <div class="comment-name-section">
-                <p class="commented-by">Commented By/</p>
-                <p class="owner-comment">Mahmoud</p>
-              </div>
-              <div class="comment-time-div">
-                <p class="comment-time">1-1-2</p>
-              </div>
-            </div>
-            <h1 class="comment-title">Hello</h1>
-            <p class="comment-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores possimus minima reiciendis velit tempora explicabo cum autem nesciunt expedita laudantium, hic ea eum quia. Necessitatibus voluptatibus aliquam nisi libero recusandae?</p>
-          </section>
-          <hr>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="add-post"> 
+      <button class="open-button">Open Form</button>
+  
+      <div class="form-popup" id="myForm">
+        <form class="form-container">      
+          <label><b>Title</b></label>
+          <input class="title-input-form" type="text" placeholder="Title" name="title" required>
+      
+          <label ><b>Describtion</b></label>
+          <textarea class="describtion-input-form" type="text" placeholder="Describtion" name="describtion" required></textarea>
+          <div id="errors-message-post"></div>
+          <button type="submit" class="btn btn-add-post">Add post</button>
+          <button type="button" class="btn cancel">Close</button>
+        </form>
+      </div>
+      </section>
+  </div>
+  
   <script src="./js/script.js"></script>
 </body>
 </html>

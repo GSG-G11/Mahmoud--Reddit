@@ -3,9 +3,10 @@ const addComment = document.querySelector(".add-comment");
 const allComments = document.querySelector(".all-comments");
 const addCommentSection = document.querySelector(".add-comment-section");
 const addCommentButton = document.querySelector(".add-comment-button");
-const title = document.querySelector(".title-form-input");
-const description = document.querySelector(".description-form-input");
+const comment = document.querySelector(".comment-form-input");
 const errorMessage = document.querySelector("#errors-message");
+const closePost = document.querySelector(".cancel");
+const openPost = document.querySelector(".open-button");
 
 let inputError = [];
 showComments.addEventListener("click", (e) => {
@@ -27,11 +28,8 @@ addComment.addEventListener("click", (e) => {
 
 addCommentButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if (title.value.trim() === "") {
-    inputError.push("Title is required");
-  }
-  if (description.value.trim() === "") {
-    inputError.push("Description is required");
+  if (comment.value.trim() === "") {
+    inputError.push("Comment is required");
   }
   while (errorMessage.firstChild) {
     errorMessage.removeChild(errorMessage.lastChild);
@@ -45,4 +43,13 @@ addCommentButton.addEventListener("click", (e) => {
     inputError = [];
     return;
   }
+});
+
+openPost.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("myForm").style.display = "block";
+});
+closePost.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("myForm").style.display = "none";
 });
