@@ -58,13 +58,16 @@ header {
   opacity: 0.9;
 }
 
+/* ======================================================================= */
+
 .single-post {
   margin-top: 3rem;
-  margin-left: 7rem;
+  margin-left: 1rem;
   border: 0.2rem solid #758493;
-  width: 60rem;
+  width: 50rem;
   background-color: white;
   display: flex;
+  margin-bottom: 2rem;
 }
 .votes {
   background-color: #f4f6f8;
@@ -135,7 +138,180 @@ header {
   transition: all 0.3s ease-in;
 }
 
-.up-button:hover,
+.up-button:hover {
+  color: green;
+}
+
 .down-button:hover {
-  background-color: #c3cad1;
+  color: red;
+}
+/* ======================================================================= */
+
+.all-comments {
+  display: none;
+}
+
+.comment-section {
+  margin: 1rem;
+}
+.name-in-comment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-name-section {
+  display: flex;
+}
+
+.comment-title {
+  margin-top: 1rem;
+}
+
+.comment-description {
+  margin-top: 0.5rem;
+}
+
+/* ======================================================================= */
+
+.header-add-comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-add-comment h1 {
+  color: #0179d2;
+}
+
+.add-comment-section {
+  border: 1px solid rgb(235, 237, 240);
+  padding-top: 0.5rem;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  display: none;
+}
+
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: filter 0.1s ease 0s;
+}
+
+.comment-form-input {
+  width: 40rem;
+  border: 1px solid rgb(235, 237, 240);
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: rgb(252, 252, 252);
+  font-size: 1.5rem;
+  outline: none;
+}
+
+.comment-form-input:focus {
+  box-shadow: 0px 0px 5px;
+}
+
+.add-comment-button {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  width: 10rem;
+  height: 3rem;
+  background-color: rgb(24, 144, 255);
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+
+.add-comment-button:hover {
+  opacity: 0.8;
+}
+
+#errors-message,
+#errors-message-post {
+  position: relative;
+  color: rgb(245, 34, 45);
+  width: 100%;
+  text-align: center;
+}
+
+/* ======================================================================= */
+
+.display-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-post {
+  background-color: #0179d2;
+  display: flex;
+  margin-top: 3rem;
+  width: 22rem;
+  height: 4rem;
+}
+
+.open-button {
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 4rem;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  border: 3px solid #f1f1f1;
+  z-index: 1;
+}
+
+.form-container {
+  width: 25rem;
+  padding: 0.6rem;
+  background-color: white;
+}
+
+.title-input-form,
+.describtion-input-form {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.describtion-input-form {
+  height: 8rem;
+}
+
+.title-input-form:focus,
+.describtion-input-form:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  background-color: red;
+}
+
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
 }

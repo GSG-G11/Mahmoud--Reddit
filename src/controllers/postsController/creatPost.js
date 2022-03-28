@@ -1,5 +1,5 @@
-const { addPost } = require("../../../database/queries");
-const { postsSchema } = require("../../../utils");
+const { addPost } = require("../../database/queries");
+const { postsSchema } = require("../../utils");
 module.exports = async (req, res) => {
   try {
     const { title, description } = req.body;
