@@ -11,45 +11,9 @@ const openPost = document.querySelector(".open-button");
 const addPostBtn = document.querySelector(".btn-add-post");
 const titlePost = document.querySelector(".title-input-form");
 const describtionPost = document.querySelector(".describtion-input-form");
+const posts = document.querySelector(".posts");
 
 let inputError = [];
-
-showComments.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (allComments.style.display === "block") {
-    allComments.style.display = "none";
-  } else {
-    allComments.style.display = "block";
-  }
-});
-
-addComment.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (addCommentSection.style.display === "block") {
-    addCommentSection.style.display = "none";
-  } else {
-    addCommentSection.style.display = "block";
-  }
-});
-
-addCommentButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (comment.value.trim() === "") {
-    inputError.push("Comment is required");
-  }
-  while (errorMessage.firstChild) {
-    errorMessage.removeChild(errorMessage.lastChild);
-  }
-  if (inputError.length !== 0) {
-    inputError.forEach((e) => {
-      const msg = document.createElement("h3");
-      msg.textContent = e;
-      errorMessage.appendChild(msg);
-    });
-    inputError = [];
-    return;
-  }
-});
 
 openPost.addEventListener("click", (e) => {
   e.preventDefault();
@@ -93,15 +57,109 @@ addPostBtn.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (res.message === "Post successfully added") {
-        console.log("posted successfully");
+        // eslint-disable-next-line no-undef
+        swal("Posted!", "posted successfully", "success");
       } else {
-        const msg = document.createElement("h3");
-        msg.textContent = res.message;
-        errorPostMessage.appendChild(msg);
+        // eslint-disable-next-line no-undef
+        swal("Please login to add post", res.message, "error");
       }
     })
     .then(() => {
       titlePost.value = "";
       describtionPost.value = "";
     });
+  getPosts();
 });
+
+const displayPosts = (data) => {
+  while (posts.firstChild) {
+    posts.removeChild(posts.lastChild);
+  }
+  data.forEach((post) => {
+    const postDiv = document.createElement("div");
+    postDiv.classList.add("single-post");
+    const sideVotes = document.createElement("aside");
+    sideVotes.classList.add("votes");
+    const upButton = document.createElement("button");
+    upButton.classList.add("up-button");
+    const downButton = document.createElement("button");
+    downButton.classList.add("down-button");
+    const upIcon = document.createElement("i");
+    upIcon.classList.add("ri-arrow-up-line");
+    const downIcon = document.createElement("i");
+    downIcon.classList.add("ri-arrow-down-line");
+    const votes = document.createElement("h4");
+    votes.textContent = 0;
+    const coloumnFlex = document.createElement("div");
+    coloumnFlex.classList.add("column-flex");
+    const sectionNameInPost = document.createElement("section");
+    sectionNameInPost.classList.add("name-in-post");
+    const nameSection = document.createElement("div");
+    nameSection.classList.add("name-section");
+    const postedBy = document.createElement("p");
+    postedBy.classList.add("posted-by");
+    postedBy.textContent = "Posted By/";
+    const ownerPost = document.createElement("p");
+    ownerPost.classList.add("owner-post");
+    ownerPost.textContent = post.name;
+    const timeDiv = document.createElement("div");
+    timeDiv.classList.add("time-div");
+    const time = document.createElement("p");
+    time.classList.add("time");
+    time.textContent = post.created_at;
+    const titleAndDescribtionSection = document.createElement("section");
+    titleAndDescribtionSection.classList.add("title-and-description");
+    const titlePost = document.createElement("h2");
+    titlePost.classList.add("title-post");
+    titlePost.textContent = post.title;
+    const describtionPost = document.createElement("p");
+    describtionPost.classList.add("description-post");
+    describtionPost.textContent = post.description;
+    const commentsSide = document.createElement("aside");
+    commentsSide.classList.add("comments-side");
+    const showComment = document.createElement("button");
+    showComment.classList.add("show-comment");
+    showComment.textContent = "Show Comments";
+    const commentIcon = document.createElement("i");
+    commentIcon.classList.add("ri-message-2-line");
+    const addcomments = document.createElement("button");
+    addcomments.classList.add("add-comment");
+    addcomments.textContent = "Add Comment";
+    const addCommentIcon = document.createElement("i");
+    addCommentIcon.classList.add("ri-chat-new-fill");
+
+    posts.appendChild(postDiv);
+    postDiv.appendChild(sideVotes);
+    sideVotes.appendChild(upButton);
+    upButton.appendChild(upIcon);
+    sideVotes.appendChild(votes);
+    sideVotes.appendChild(downButton);
+    downButton.appendChild(downIcon);
+    postDiv.appendChild(coloumnFlex);
+    coloumnFlex.appendChild(sectionNameInPost);
+    sectionNameInPost.appendChild(nameSection);
+    nameSection.appendChild(postedBy);
+    nameSection.appendChild(ownerPost);
+    sectionNameInPost.appendChild(timeDiv);
+    timeDiv.appendChild(time);
+    coloumnFlex.appendChild(titleAndDescribtionSection);
+    titleAndDescribtionSection.appendChild(titlePost);
+    titleAndDescribtionSection.appendChild(describtionPost);
+    coloumnFlex.appendChild(commentsSide);
+    commentsSide.appendChild(showComment);
+    showComment.appendChild(commentIcon);
+    commentsSide.appendChild(addcomments);
+    addcomments.appendChild(addCommentIcon);
+  });
+};
+
+const getPosts = () => {
+  fetch("/posts", {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((res) => displayPosts(res.data));
+};
+
+getPosts();
