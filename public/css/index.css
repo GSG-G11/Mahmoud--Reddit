@@ -21,6 +21,10 @@ header {
   width: 6.875rem;
 }
 
+.column-flex {
+  width: 50rem;
+}
+
 .login-signup {
   width: 18rem;
   height: 2rem;
