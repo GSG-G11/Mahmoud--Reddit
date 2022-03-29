@@ -1,8 +1,6 @@
 const { getSignupPage, signup } = require("./auth/signupController");
 const { getLoginPage, login, getUser } = require("./auth/loginController");
-const { addPost } = require("./postsController");
-const { getPosts } = require("./postsController");
-
+const { addPost, getPosts } = require("./postsController");
 module.exports = {
   getSignupPage,
   signup,

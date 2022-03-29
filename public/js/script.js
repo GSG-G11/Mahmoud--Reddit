@@ -12,44 +12,51 @@ const addPostBtn = document.querySelector(".btn-add-post");
 const titlePost = document.querySelector(".title-input-form");
 const describtionPost = document.querySelector(".describtion-input-form");
 const posts = document.querySelector(".posts");
+const namesDiv = document.querySelector(".user-name-div");
+const loginButton = document.querySelector(".log-in-button");
+const signUpButton = document.querySelector(".sign-up-button");
+const userName = document.querySelector(".user-name");
+const logOut = document.querySelector(".log-out-button");
 
 let inputError = [];
-showComments.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (allComments.style.display === "block") {
-    allComments.style.display = "none";
-  } else {
-    allComments.style.display = "block";
-  }
-});
 
-addComment.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (addCommentSection.style.display === "block") {
-    addCommentSection.style.display = "none";
-  } else {
-    addCommentSection.style.display = "block";
-  }
-});
+namesDiv.style.display = "none";
+// showComments.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (allComments.style.display === "block") {
+//     allComments.style.display = "none";
+//   } else {
+//     allComments.style.display = "block";
+//   }
+// });
 
-addCommentButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (comment.value.trim() === "") {
-    inputError.push("Comment is required");
-  }
-  while (errorMessage.firstChild) {
-    errorMessage.removeChild(errorMessage.lastChild);
-  }
-  if (inputError.length !== 0) {
-    inputError.forEach((e) => {
-      const msg = document.createElement("h3");
-      msg.textContent = e;
-      errorMessage.appendChild(msg);
-    });
-    inputError = [];
-    return;
-  }
-});
+// addComment.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (addCommentSection.style.display === "block") {
+//     addCommentSection.style.display = "none";
+//   } else {
+//     addCommentSection.style.display = "block";
+//   }
+// });
+
+// addCommentButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (comment.value.trim() === "") {
+//     inputError.push("Comment is required");
+//   }
+//   while (errorMessage.firstChild) {
+//     errorMessage.removeChild(errorMessage.lastChild);
+//   }
+//   if (inputError.length !== 0) {
+//     inputError.forEach((e) => {
+//       const msg = document.createElement("h3");
+//       msg.textContent = e;
+//       errorMessage.appendChild(msg);
+//     });
+//     inputError = [];
+//     return;
+//   }
+// });
 
 openPost.addEventListener("click", (e) => {
   e.preventDefault();
@@ -164,6 +171,13 @@ const displayPosts = (data) => {
     const addCommentIcon = document.createElement("i");
     addCommentIcon.classList.add("ri-chat-new-fill");
 
+    const postId = document.createElement("input");
+    postId.type = "hidden";
+    postId.value = post.id;
+    postId.name = "postId";
+    postId.id = "postId";
+    postDiv.appendChild(postId);
+
     posts.appendChild(postDiv);
     postDiv.appendChild(sideVotes);
     sideVotes.appendChild(upButton);
@@ -186,6 +200,16 @@ const displayPosts = (data) => {
     showComment.appendChild(commentIcon);
     commentsSide.appendChild(addcomments);
     addcomments.appendChild(addCommentIcon);
+
+    // addComment.addEventListener("click", (e) => {
+    //   fetch(`/posts/${post.id}/comments`, {
+    //     method: "post",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       // comment: e.value,
+    //     }),
+    //   });
+    // });
   });
 };
 
@@ -199,3 +223,39 @@ const getPosts = () => {
 };
 
 getPosts();
+
+fetch("/getUserName", {
+  method: "get",
+  headers: { "Content-Type": "application/json" },
+})
+  .then((res) => res.json())
+  .then((res) => {
+    if (res.message === "User exists") {
+      namesDiv.style.display = "flex";
+      logOut.style.display = "flex";
+      loginButton.style.display = "none";
+      signUpButton.style.display = "none";
+      userName.textContent = res.name;
+    } else {
+      namesDiv.style.display = "none";
+      logOut.style.display = "none";
+      loginButton.style.display = "flex";
+      signUpButton.style.display = "flex";
+    }
+  });
+
+logOut.addEventListener("click", () => {
+  fetch("/logout", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.message === "log out success") {
+        namesDiv.style.display = "none";
+        logOut.style.display = "none";
+        loginButton.style.display = "flex";
+        signUpButton.style.display = "flex";
+      }
+    });
+});
