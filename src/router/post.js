@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const checkSignin = require("../middlewares/checkSignin");
-const { getPosts, addPost } = require("../controllers");
+const { getPosts, addPost, getAllComments } = require("../controllers");
 
 router.post("/post", checkSignin, addPost);
 router.get("/posts", getPosts);
+router.get("/comments", getAllComments);
 
 // router.post("/posts/:postId/comments", checkSignin, (req, res) => {
 //   const { postId } = req.params;

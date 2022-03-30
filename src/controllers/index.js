@@ -1,6 +1,7 @@
 const { getSignupPage, signup } = require("./auth/signupController");
 const { getLoginPage, login, getUser } = require("./auth/loginController");
 const { addPost, getPosts } = require("./postsController");
+const { getAllComments } = require("./comments");
 module.exports = {
   getSignupPage,
   signup,
@@ -9,4 +10,5 @@ module.exports = {
   addPost,
   getPosts,
   getUser,
+  getAllComments,
 };
