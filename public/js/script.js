@@ -222,7 +222,6 @@ const displayPosts = (data) => {
         }
       })
       .then((res) => {
-        // console.log(res);
         if (res.message === "comments successfully get it") {
           res.comments.forEach((comment) => {
             displayComment(comment, coloumnFlex, showComment);
