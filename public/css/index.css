@@ -91,6 +91,7 @@ header {
   display: flex;
   margin-bottom: 2rem;
 }
+
 .votes {
   background-color: #f4f6f8;
   width: 3rem;
@@ -137,7 +138,8 @@ header {
 }
 
 .show-comment,
-.add-comment {
+.add-comment,
+.delete {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -146,10 +148,19 @@ header {
   cursor: pointer;
   transition: all 0.3s ease-in;
 }
+.ri-close-circle-fill {
+  display: absolute;
+  /* color: red; */
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in;
+}
 
 .show-comment:hover,
 .add-comment:hover {
   background-color: #c3cad1;
+}
+.delete:hover {
+  background-color: rgb(221, 84, 84);
 }
 
 .up-button,
@@ -165,7 +176,7 @@ header {
 }
 
 .down-button:hover {
-  color: red;
+  color: rgb(255, 0, 0);
 }
 /* ======================================================================= */
 
