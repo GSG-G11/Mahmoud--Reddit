@@ -5,6 +5,7 @@ const addPost = require("./posts/addPost");
 const getPosts = require("./posts/getPosts");
 const addComment = require("./comment/addComment");
 const getUserName = require("./login/getUserName");
+const getAllComments = require("./comment/getAllComments");
 
 module.exports = {
   getUserByEmail,
@@ -14,4 +15,5 @@ module.exports = {
   getPosts,
   addComment,
   getUserName,
+  getAllComments,
 };
