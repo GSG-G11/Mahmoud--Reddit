@@ -27,19 +27,5 @@ CREATE TABLE comments (
   FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
 );
 
-INSERT INTO users (name, email, password) VALUES 
-  ('Mahmoud', 'ma@gmail.com', 'Mahmoud@123'), 
-  ('Ahmad', 'Ahmad@gmail.com', 'AMahmoud@123');
-
-INSERT INTO posts (title, description, user_id) VALUES 
-('Test1', 'Hello1', 1), 
-('Test2', 'Hello2', 2), 
-('Test3', 'Hello3', 1);
-
-INSERT INTO comments (description, user_id ,post_id) VALUES 
-('Test1', 1, 1), 
-('Test2', 2, 2), 
-('Test3', 2, 1),
-('Test4', 1, 3);
 
 COMMIT;
