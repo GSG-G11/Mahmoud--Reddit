@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
 
     if (token) {
       const value = await verifyToken(token, SECRET_KEY);
+      req.user_id = value.userId;
       req.userId = value.userId;
       next();
     } else {

@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
   } catch (error) {
     if (error.details) {
       const allErrors = error.details.map((x) => x.message);
-      console.log(allErrors);
       return res.json(allErrors);
     }
     res.json(error);

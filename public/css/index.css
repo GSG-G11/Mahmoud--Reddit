@@ -31,9 +31,16 @@ header {
   display: flex;
   justify-content: space-around;
 }
+.user-name-div {
+  width: 18rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+}
 
 .log-in-button,
-.sign-up-button {
+.sign-up-button,
+.log-out-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,10 +49,21 @@ header {
   border: 1px solid;
   border-radius: 25px;
 }
-.log-in-button {
+.user-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #ff4500;
+}
+.log-in-button,
+.log-out-button {
   background-color: white;
   color: #0179d2;
   transition: all 0.3s ease-in;
+}
+.log-out-button {
+  color: red;
 }
 
 .sign-up-button {
