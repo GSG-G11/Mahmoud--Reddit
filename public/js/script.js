@@ -1,10 +1,3 @@
-const showComments = document.querySelector(".show-comment");
-const addComment = document.querySelector(".add-comment");
-const allComments = document.querySelector(".all-comments");
-const addCommentSection = document.querySelector(".add-comment-section");
-const addCommentButton = document.querySelector(".add-comment-button");
-const comment = document.querySelector(".comment-form-input");
-const errorMessage = document.querySelector("#errors-message");
 const errorPostMessage = document.querySelector("#errors-message-post");
 const closePost = document.querySelector(".cancel");
 const openPost = document.querySelector(".open-button");
@@ -21,42 +14,6 @@ const logOut = document.querySelector(".log-out-button");
 let inputError = [];
 
 namesDiv.style.display = "none";
-// showComments.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (allComments.style.display === "block") {
-//     allComments.style.display = "none";
-//   } else {
-//     allComments.style.display = "block";
-//   }
-// });
-
-// addComment.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (addCommentSection.style.display === "block") {
-//     addCommentSection.style.display = "none";
-//   } else {
-//     addCommentSection.style.display = "block";
-//   }
-// });
-
-// addCommentButton.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (comment.value.trim() === "") {
-//     inputError.push("Comment is required");
-//   }
-//   while (errorMessage.firstChild) {
-//     errorMessage.removeChild(errorMessage.lastChild);
-//   }
-//   if (inputError.length !== 0) {
-//     inputError.forEach((e) => {
-//       const msg = document.createElement("h3");
-//       msg.textContent = e;
-//       errorMessage.appendChild(msg);
-//     });
-//     inputError = [];
-//     return;
-//   }
-// });
 
 openPost.addEventListener("click", (e) => {
   e.preventDefault();
@@ -170,13 +127,17 @@ const displayPosts = (data) => {
     addcomments.textContent = "Add Comment";
     const addCommentIcon = document.createElement("i");
     addCommentIcon.classList.add("ri-chat-new-fill");
-
-    const postId = document.createElement("input");
-    postId.type = "hidden";
-    postId.value = post.id;
-    postId.name = "postId";
-    postId.id = "postId";
-    postDiv.appendChild(postId);
+    const addCommentSection = document.createElement("section");
+    addCommentSection.classList.add("add-comment-section");
+    const commentForm = document.createElement("form");
+    commentForm.classList.add("add-comment-form");
+    const commentText = document.createElement("textarea");
+    commentText.classList.add("comment-form-input");
+    const errorsMessage = document.createElement("div");
+    errorsMessage.setAttribute("id", "errors-message");
+    const addCommentButton = document.createElement("button");
+    addCommentButton.textContent = "Add";
+    addCommentButton.classList.add("add-comment-button");
 
     posts.appendChild(postDiv);
     postDiv.appendChild(sideVotes);
@@ -200,16 +161,98 @@ const displayPosts = (data) => {
     showComment.appendChild(commentIcon);
     commentsSide.appendChild(addcomments);
     addcomments.appendChild(addCommentIcon);
+    coloumnFlex.appendChild(addCommentSection);
+    addCommentSection.appendChild(commentForm);
+    commentForm.appendChild(commentText);
+    commentForm.appendChild(errorsMessage);
+    commentForm.appendChild(addCommentButton);
+    fetch(`/comment/${post.id}`, {
+      method: "get",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message === "comments successfully get it") {
+          res.comments.forEach((comment) => {
+            const allCommentsDiv = document.createElement("div");
+            allCommentsDiv.classList.add("all-comments");
+            const commentSection = document.createElement("section");
+            commentSection.classList.add("comment-section");
+            const nameInComment = document.createElement("div");
+            nameInComment.classList.add("name-in-comment");
+            const commentNameSection = document.createElement("div");
+            commentNameSection.classList.add("comment-name-section");
+            const commentBy = document.createElement("p");
+            commentBy.textContent = "Comment By/";
+            commentBy.classList.add("comment-by");
+            const commentOwner = document.createElement("p");
+            commentOwner.textContent = comment.name;
+            commentOwner.classList.add("owner-comment");
+            const commentTimeDiv = document.createElement("div");
+            commentTimeDiv.classList.add("comment-time-div");
+            const commentTime = document.createElement("p");
+            commentTime.textContent = comment.created_at;
+            commentTime.classList.add("comment-time");
+            const commentDecription = document.createElement("p");
+            commentDecription.textContent = comment.description;
+            commentDecription.classList.add("comment-description");
+            const hr = document.createElement("hr");
+            coloumnFlex.appendChild(allCommentsDiv);
+            allCommentsDiv.appendChild(commentSection);
+            commentSection.appendChild(nameInComment);
+            nameInComment.appendChild(commentNameSection);
+            commentNameSection.appendChild(commentBy);
+            commentNameSection.appendChild(commentOwner);
+            nameInComment.appendChild(commentTimeDiv);
+            commentTimeDiv.appendChild(commentTime);
+            commentSection.appendChild(commentDecription);
+            commentSection.appendChild(hr);
+            showComment.addEventListener("click", (e) => {
+              e.preventDefault();
+              if (allCommentsDiv.style.display === "block") {
+                allCommentsDiv.style.display = "none";
+              } else {
+                allCommentsDiv.style.display = "block";
+              }
+            });
+          });
+        } else {
+          showComment.addEventListener("click", (e) => {
+            e.preventDefault();
+            // eslint-disable-next-line no-undef
+            swal("No comments Found", "No comments", "error");
+          });
+        }
+      });
 
-    // addComment.addEventListener("click", (e) => {
-    //   fetch(`/posts/${post.id}/comments`, {
-    //     method: "post",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       // comment: e.value,
-    //     }),
-    //   });
-    // });
+    addcomments.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (addCommentSection.style.display === "block") {
+        addCommentSection.style.display = "none";
+      } else {
+        addCommentSection.style.display = "block";
+      }
+    });
+
+    addCommentButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log(post.id);
+      if (commentText.value.trim() === "") {
+        inputError.push("Comment is required");
+      }
+      while (errorsMessage.firstChild) {
+        errorsMessage.removeChild(errorsMessage.lastChild);
+      }
+      if (inputError.length !== 0) {
+        inputError.forEach((e) => {
+          const msg = document.createElement("h3");
+          msg.textContent = e;
+          errorsMessage.appendChild(msg);
+        });
+        inputError = [];
+        return;
+      }
+    });
   });
 };
 
