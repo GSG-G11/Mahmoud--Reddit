@@ -10,7 +10,7 @@ switch (NODE_ENV) {
     URL = DEV_DATABASE_URL;
     SSL = false;
     break;
-  case "production":
+  case "DATABASE_URL":
     URL = DATABASE_URL;
     SSL = { rejectUnauthorized: false };
     break;
