@@ -119,7 +119,10 @@ const displayPosts = (data) => {
   while (posts.firstChild) {
     posts.removeChild(posts.lastChild);
   }
-  data.forEach((post) => {
+
+  let user = data.userId;
+
+  data.data.forEach((post) => {
     const postDiv = document.createElement("div");
     postDiv.classList.add("single-post");
     const sideVotes = document.createElement("aside");
@@ -171,6 +174,7 @@ const displayPosts = (data) => {
     addcomments.textContent = "Add Comment";
     const addCommentIcon = document.createElement("i");
     addCommentIcon.classList.add("ri-chat-new-fill");
+
     const addCommentSection = document.createElement("section");
     addCommentSection.classList.add("add-comment-section");
     const commentForm = document.createElement("form");
@@ -210,6 +214,27 @@ const displayPosts = (data) => {
     commentForm.appendChild(commentText);
     commentForm.appendChild(errorsMessage);
     commentForm.appendChild(addCommentButton);
+    // console.log(post);
+    if (post.user_id === user) {
+      const deletPost = document.createElement("button");
+      deletPost.classList.add("delete");
+      deletPost.textContent = "Delete post";
+      const deleteIcon = document.createElement("i");
+      deleteIcon.classList.add("ri-close-circle-fill");
+      commentsSide.appendChild(deletPost);
+      deletPost.appendChild(deleteIcon);
+      deletPost.addEventListener("click", (e) => {
+        // console.log(user);
+        e.preventDefault();
+        fetch(`/post/${post.id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          // eslint-disable-next-line no-unused-vars
+          .then((res) => window.location.assign("/"));
+      });
+    }
+
     fetch(`/comment/${post.id}`, {
       method: "get",
       headers: { "Content-Type": "application/json" },
@@ -276,8 +301,6 @@ const displayPosts = (data) => {
             setTimeout(() => {
               window.location.assign("/");
             }, 1000);
-
-            // displayComment(comment, coloumnFlex, showComment);
           } else {
             // eslint-disable-next-line no-undef
             swal("Unauthorized", "Please Signin to add comment", "error");
@@ -294,7 +317,7 @@ const getPosts = () => {
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
-    .then((res) => displayPosts(res.data));
+    .then((res) => displayPosts(res));
 };
 
 getPosts();
