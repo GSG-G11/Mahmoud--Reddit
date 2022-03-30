@@ -2,6 +2,8 @@ const { getSignupPage, signup } = require("./auth/signupController");
 const { getLoginPage, login, getUser } = require("./auth/loginController");
 const { addPost, getPosts } = require("./postsController");
 const { getAllComments, addComment } = require("./comments");
+const { client } = require("./errors/404");
+const { server } = require("./errors/500");
 module.exports = {
   getSignupPage,
   signup,
@@ -12,4 +14,6 @@ module.exports = {
   getUser,
   getAllComments,
   addComment,
+  client,
+  server,
 };

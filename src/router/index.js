@@ -3,10 +3,11 @@ const login = require("./login");
 const signUp = require("./signup");
 const post = require("./post");
 const logout = require("./logout");
-
+const { client, server } = require("../controllers");
 router.use(signUp);
 router.use(login);
 router.use(post);
 router.use(logout);
-
+router.use(client);
+router.use(server);
 module.exports = router;
