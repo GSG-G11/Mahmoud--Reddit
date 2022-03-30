@@ -21,42 +21,42 @@ const logOut = document.querySelector(".log-out-button");
 let inputError = [];
 
 namesDiv.style.display = "none";
-showComments.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (allComments.style.display === "block") {
-    allComments.style.display = "none";
-  } else {
-    allComments.style.display = "block";
-  }
-});
+// showComments.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (allComments.style.display === "block") {
+//     allComments.style.display = "none";
+//   } else {
+//     allComments.style.display = "block";
+//   }
+// });
 
-addComment.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (addCommentSection.style.display === "block") {
-    addCommentSection.style.display = "none";
-  } else {
-    addCommentSection.style.display = "block";
-  }
-});
+// addComment.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (addCommentSection.style.display === "block") {
+//     addCommentSection.style.display = "none";
+//   } else {
+//     addCommentSection.style.display = "block";
+//   }
+// });
 
-addCommentButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (comment.value.trim() === "") {
-    inputError.push("Comment is required");
-  }
-  while (errorMessage.firstChild) {
-    errorMessage.removeChild(errorMessage.lastChild);
-  }
-  if (inputError.length !== 0) {
-    inputError.forEach((e) => {
-      const msg = document.createElement("h3");
-      msg.textContent = e;
-      errorMessage.appendChild(msg);
-    });
-    inputError = [];
-    return;
-  }
-});
+// addCommentButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (comment.value.trim() === "") {
+//     inputError.push("Comment is required");
+//   }
+//   while (errorMessage.firstChild) {
+//     errorMessage.removeChild(errorMessage.lastChild);
+//   }
+//   if (inputError.length !== 0) {
+//     inputError.forEach((e) => {
+//       const msg = document.createElement("h3");
+//       msg.textContent = e;
+//       errorMessage.appendChild(msg);
+//     });
+//     inputError = [];
+//     return;
+//   }
+// });
 
 openPost.addEventListener("click", (e) => {
   e.preventDefault();
