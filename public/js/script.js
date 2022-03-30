@@ -25,6 +25,17 @@ closePost.addEventListener("click", (e) => {
   document.getElementById("myForm").style.display = "none";
 });
 
+const getPosts = () => {
+  fetch("/posts", {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((res) => displayPosts(res));
+};
+
+getPosts();
+
 addPostBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (titlePost.value.trim() === "") {
@@ -310,17 +321,6 @@ const displayPosts = (data) => {
     });
   });
 };
-
-const getPosts = () => {
-  fetch("/posts", {
-    method: "get",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => res.json())
-    .then((res) => displayPosts(res));
-};
-
-getPosts();
 
 fetch("/getUserName", {
   method: "get",
