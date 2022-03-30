@@ -3,14 +3,18 @@ const { commentsSchema } = require("../../utils");
 
 module.exports = async (req, res) => {
   try {
-    const { description, post_id } = req.body;
+    const {
+      body: { description },
+    } = req;
     const { user_id } = req;
-    // console.log(user_id);
+    const {
+      params: { id },
+    } = req;
     await commentsSchema.validateAsync({ description });
-    await addComment(description, user_id, post_id);
+    const addedComment = await addComment(description, user_id, id);
     return res.status(201).json({
-      status: "success",
       message: "Comment successfully added",
+      comment: addedComment,
     });
   } catch (error) {
     if (error.details) {
