@@ -2,11 +2,13 @@ const { getAllComments } = require("../../database/queries");
 
 module.exports = async (req, res) => {
   try {
-    const { post_id } = req.body;
-    const comments = await getAllComments(post_id);
+    const {
+      params: { id },
+    } = req;
+    const comments = await getAllComments(id);
     if (comments.length !== 0) {
       return res.status(200).json({
-        status: "comments successfully get it",
+        message: "comments successfully get it",
         comments,
       });
     }
