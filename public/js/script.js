@@ -71,6 +71,50 @@ addPostBtn.addEventListener("click", (e) => {
   getPosts();
 });
 
+const displayComment = (comment, coloumnFlex, showComment) => {
+  const allCommentsDiv = document.createElement("div");
+  allCommentsDiv.classList.add("all-comments");
+  const commentSection = document.createElement("section");
+  commentSection.classList.add("comment-section");
+  const nameInComment = document.createElement("div");
+  nameInComment.classList.add("name-in-comment");
+  const commentNameSection = document.createElement("div");
+  commentNameSection.classList.add("comment-name-section");
+  const commentBy = document.createElement("p");
+  commentBy.textContent = "Comment By/";
+  commentBy.classList.add("comment-by");
+  const commentOwner = document.createElement("p");
+  commentOwner.textContent = comment.name;
+  commentOwner.classList.add("owner-comment");
+  const commentTimeDiv = document.createElement("div");
+  commentTimeDiv.classList.add("comment-time-div");
+  const commentTime = document.createElement("p");
+  commentTime.textContent = comment.date;
+  commentTime.classList.add("comment-time");
+  const commentDecription = document.createElement("p");
+  commentDecription.textContent = comment.description;
+  commentDecription.classList.add("comment-description");
+  const hr = document.createElement("hr");
+  coloumnFlex.appendChild(allCommentsDiv);
+  allCommentsDiv.appendChild(commentSection);
+  commentSection.appendChild(nameInComment);
+  nameInComment.appendChild(commentNameSection);
+  commentNameSection.appendChild(commentBy);
+  commentNameSection.appendChild(commentOwner);
+  nameInComment.appendChild(commentTimeDiv);
+  commentTimeDiv.appendChild(commentTime);
+  commentSection.appendChild(commentDecription);
+  commentSection.appendChild(hr);
+  showComment.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (allCommentsDiv.style.display === "block") {
+      allCommentsDiv.style.display = "none";
+    } else {
+      allCommentsDiv.style.display = "block";
+    }
+  });
+};
+
 const displayPosts = (data) => {
   while (posts.firstChild) {
     posts.removeChild(posts.lastChild);
@@ -170,51 +214,18 @@ const displayPosts = (data) => {
       method: "get",
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
       .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          return "No  comments";
+        }
+      })
+      .then((res) => {
+        // console.log(res);
         if (res.message === "comments successfully get it") {
           res.comments.forEach((comment) => {
-            const allCommentsDiv = document.createElement("div");
-            allCommentsDiv.classList.add("all-comments");
-            const commentSection = document.createElement("section");
-            commentSection.classList.add("comment-section");
-            const nameInComment = document.createElement("div");
-            nameInComment.classList.add("name-in-comment");
-            const commentNameSection = document.createElement("div");
-            commentNameSection.classList.add("comment-name-section");
-            const commentBy = document.createElement("p");
-            commentBy.textContent = "Comment By/";
-            commentBy.classList.add("comment-by");
-            const commentOwner = document.createElement("p");
-            commentOwner.textContent = comment.name;
-            commentOwner.classList.add("owner-comment");
-            const commentTimeDiv = document.createElement("div");
-            commentTimeDiv.classList.add("comment-time-div");
-            const commentTime = document.createElement("p");
-            commentTime.textContent = comment.created_at;
-            commentTime.classList.add("comment-time");
-            const commentDecription = document.createElement("p");
-            commentDecription.textContent = comment.description;
-            commentDecription.classList.add("comment-description");
-            const hr = document.createElement("hr");
-            coloumnFlex.appendChild(allCommentsDiv);
-            allCommentsDiv.appendChild(commentSection);
-            commentSection.appendChild(nameInComment);
-            nameInComment.appendChild(commentNameSection);
-            commentNameSection.appendChild(commentBy);
-            commentNameSection.appendChild(commentOwner);
-            nameInComment.appendChild(commentTimeDiv);
-            commentTimeDiv.appendChild(commentTime);
-            commentSection.appendChild(commentDecription);
-            commentSection.appendChild(hr);
-            showComment.addEventListener("click", (e) => {
-              e.preventDefault();
-              if (allCommentsDiv.style.display === "block") {
-                allCommentsDiv.style.display = "none";
-              } else {
-                allCommentsDiv.style.display = "block";
-              }
-            });
+            displayComment(comment, coloumnFlex, showComment);
           });
         } else {
           showComment.addEventListener("click", (e) => {
@@ -235,8 +246,7 @@ const displayPosts = (data) => {
     });
 
     addCommentButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(post.id);
+      // e.preventDefault();
       if (commentText.value.trim() === "") {
         inputError.push("Comment is required");
       }
@@ -252,6 +262,29 @@ const displayPosts = (data) => {
         inputError = [];
         return;
       }
+      fetch(`/comments/${post.id}`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          description: commentText.value,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message === "Comment successfully added") {
+            // eslint-disable-next-line no-undef
+            swal("Commented!", "posted successfully", "success");
+            setTimeout(() => {
+              window.location.assign("/");
+            }, 1000);
+
+            // displayComment(comment, coloumnFlex, showComment);
+          } else {
+            // eslint-disable-next-line no-undef
+            swal("Unauthorized", "Please Signin to add comment", "error");
+          }
+        });
+      e.preventDefault();
     });
   });
 };
@@ -271,7 +304,12 @@ fetch("/getUserName", {
   method: "get",
   headers: { "Content-Type": "application/json" },
 })
-  .then((res) => res.json())
+  .then((res) => {
+    if (res.status === 401) {
+      return "THE USER IS NOT LOGGED IN";
+    }
+    return res.json();
+  })
   .then((res) => {
     if (res.message === "User exists") {
       namesDiv.style.display = "flex";

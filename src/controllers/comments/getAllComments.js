@@ -12,11 +12,13 @@ module.exports = async (req, res) => {
         comments,
       });
     }
-    throw new Error("No comments found");
-  } catch (error) {
-    return res.status(500).json({
-      status: "error",
+    return res.status(204).json({
       message: "No comments found",
+    });
+  } catch (error) {
+    return res.status(204).json({
+      status: "error",
+      message: "Internet Server error",
     });
   }
 };
